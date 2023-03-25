@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react'; 
-import { useFirebaseAuth } from './firebaseAuthContext';
+import { useFirebaseAuth } from '/config/firebaseAuthContext';
 
 const withAuthRedirect = (WrappedComponent) => {
   const Wrapper = (props) => {

@@ -14,10 +14,7 @@
     "@emotion/styled": "^11.10.6",
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
-<<<<<<< HEAD
-=======
     "firebase": "^9.18.0",
->>>>>>> effc6bd8c5a7e5389e4b5176ec80abf954a11183
     "framer-motion": "^10.9.1",
     "next": "13.2.4",
     "react": "18.2.0",

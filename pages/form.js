@@ -24,6 +24,7 @@ export default function form({props}) {
     const [firstNameValue, setFirstNameValue] = useState('')
     const [lastNameValue, setLastNameValue] = useState('')
     const [creditHistoryValue, setCreditHistoryValue] = useState('')
+    const [showTooltip, setShowTooltip] = React.useState(false)
 
     const handleFirstNameChange = (event) => setFirstNameValue(event.target.value)
     const handleLastNameChange = (event) => setLastNameValue(event.target.value)
@@ -54,11 +55,45 @@ export default function form({props}) {
                 <Heading size='xs' textTransform='uppercase'>
                         Credit History
                 </Heading>
-                        <SliderThumbWithTooltip values={creditHistoryValue}/>
+                <Slider
+                    id='slider'
+                    defaultValue={5}
+                    min={0}
+                    max={100}
+                    colorScheme='teal'
+                    onChange={(v) => {
+                        setCreditHistoryValue(v)
+                        }}
+                    onMouseEnter={() => setShowTooltip(true)}
+                    onMouseLeave={() => setShowTooltip(false)}
+                >
+                    <SliderMark value={25} mt='1' ml='-2.5' fontSize='sm'>
+                    25%
+                    </SliderMark>
+                    <SliderMark value={50} mt='1' ml='-2.5' fontSize='sm'>
+                    50%
+                    </SliderMark>
+                    <SliderMark value={75} mt='1' ml='-2.5' fontSize='sm'>
+                    75%
+                    </SliderMark>
+                    <SliderTrack>
+                    <SliderFilledTrack />
+                    </SliderTrack>
+                    <Tooltip
+                    hasArrow
+                    bg='teal.500'
+                    color='white'
+                    placement='top'
+                    isOpen={showTooltip}
+                    label={`${creditHistoryValue}%`}
+                    >
+                    <SliderThumb />
+                    </Tooltip>
+                </Slider>
                 </Box>
                 
                 <Box>
-                <Button type="submit" onClick={validateForm(firstNameValue, lastNameValue, 50)}>Submit</Button>
+                <Button type="submit" onClick={validateForm(firstNameValue, lastNameValue, creditHistoryValue)}>Submit</Button>
                 </Box>
                 </Stack>
             </CardBody>
@@ -78,7 +113,7 @@ function SliderThumbWithTooltip() {
         min={0}
         max={100}
         colorScheme='teal'
-        onChange={(v) => {
+        onChangeEnd={(v) => {
             setSliderValue(v)
             }}
         onMouseEnter={() => setShowTooltip(true)}
@@ -125,4 +160,5 @@ function validateForm(firstNameValue, lastNameValue, creditHistoryValue) {
 
     console.log(firstNameValue)
     console.log(lastNameValue)
+    console.log(creditHistoryValue)
 }

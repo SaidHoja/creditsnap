@@ -1,5 +1,13 @@
-import '@/styles/globals.css'
+import { useEffect } from 'react';
+import withAuth from 'config/withAuth';
 
-export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />
+function MyApp({ Component, pageProps }) {
+  useEffect(() => {
+    console.log('App component mounted');
+  }, []);
+
+  const AuthComponent = withAuth(Component);
+  return <Component {...pageProps} />;
 }
+
+export default MyApp;

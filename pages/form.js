@@ -23,11 +23,11 @@ import React, { useState, createContext, useContext, useEffect } from "react";
 import { getDatabase } from "firebase/database";
 import { useFirebaseAuth } from "@/config/fireBaseAuthContext";
 
-export default function Form({props}) {
-    const [firstNameValue, setFirstNameValue] = useState('')
-    const [lastNameValue, setLastNameValue] = useState('')
-    const [creditHistoryValue, setCreditHistoryValue] = useState('')
-    const [showTooltip, setShowTooltip] = React.useState(false)
+export default function Form({ props }) {
+  const [firstNameValue, setFirstNameValue] = useState('')
+  const [lastNameValue, setLastNameValue] = useState('')
+  const [creditHistoryValue, setCreditHistoryValue] = useState('')
+  const [showTooltip, setShowTooltip] = React.useState(false)
 
   const handleFirstNameChange = (event) => setFirstNameValue(event.target.value);
   const handleLastNameChange = (event) => setLastNameValue(event.target.value);
@@ -73,44 +73,8 @@ export default function Form({props}) {
                 <Heading size="xs" textTransform="uppercase">
                   Credit History
                 </Heading>
-                <ShowTooltipSlider onCreditData = {handleCreditHistoryChange}></ShowTooltipSlider>
-                {/* <Slider
-                  id="slider"
-                  defaultValue={5}
-                  min={0}
-                  max={100}
-                  colorScheme="teal"
-                  onChange={(v) => {
-                    handleCreditHistoryChange(v)
-                  }}
-                  onMouseEnter={() => setShowTooltip(true)}
-                  onMouseLeave={() => setShowTooltip(false)}
-                >
-                  <SliderMark value={25} mt="1" ml="-2.5" fontSize="sm">
-                    25%
-                  </SliderMark>
-                  <SliderMark value={50} mt="1" ml="-2.5" fontSize="sm">
-                    50%
-                  </SliderMark>
-                  <SliderMark value={75} mt="1" ml="-2.5" fontSize="sm">
-                    75%
-                  </SliderMark>
-                  <SliderTrack>
-                    <SliderFilledTrack />
-                  </SliderTrack>
-                  <Tooltip
-                    hasArrow
-                    bg="teal.500"
-                    color="white"
-                    placement="top"
-                    isOpen={showTooltip}
-                    label={`${creditHistoryValue}%`}
-                  >
-                    <SliderThumb />
-                  </Tooltip>
-                </Slider> */}
+                <ShowTooltipSlider onCreditData={handleCreditHistoryChange}></ShowTooltipSlider>
               </Box>
-
               <Box>
                 <Button
                   type="submit"
@@ -151,7 +115,7 @@ function validateForm(firstNameValue, lastNameValue, creditHistoryValue) {
 }
 
 function writeCreditData() {
-    const {user, loading} = useFirebaseAuth
-    console.log(user)
-    console.log(loading)
+  const { user, loading } = useFirebaseAuth
+  console.log(user)
+  console.log(loading)
 }

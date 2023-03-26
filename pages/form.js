@@ -1,35 +1,46 @@
 "use client";
-import ShowTooltipSlider from "@/components/ShowTooltipSlider";
+import ShowTooltipSlider from '@/components/showTooltipSlider';
+// import ShowTooltipSlider from "@/components/ShowTooltipSlider";
 import {
-    Button,
-    Card,
-    CardBody,
-    CardHeader,
-    Stack,
-    StackDivider,
-    Box,
-    Heading,
-    Input,
-    Slider,
-    SliderTrack,
-    SliderFilledTrack,
-    SliderThumb,
-    SliderMark,
-    Tooltip,
-    Center,
-  } from '@chakra-ui/react'
-  import Link from 'next/link';
-  import React, { useState, createContext, useContext, useEffect } from 'react';
-  import { getFirebaseAuth } from '@/config/fireBaseAuthContext';
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  Stack,
+  StackDivider,
+  Box,
+  Heading,
+  Input,
+  Slider,
+  SliderTrack,
+  SliderFilledTrack,
+  SliderThumb,
+  SliderMark,
+  Tooltip,
+  Center,
+  VStack,
+} from '@chakra-ui/react'
+import Link from 'next/link';
+import React, { useState, createContext, useContext, useEffect } from 'react';
+import { getFirebaseAuth } from '@/config/fireBaseAuthContext';
+
+
 
 export default function Form({ props }) {
   const [firstNameValue, setFirstNameValue] = useState('')
   const [lastNameValue, setLastNameValue] = useState('')
   const [creditHistoryValue, setCreditHistoryValue] = useState('')
-  const [showTooltip, setShowTooltip] = React.useState(false)
+  const [mortageListValue, setMortageListValue] = useState([])
+  const [carLoanListValue, setCarLoanListValue] = useState([])
+  const [extraneousLoanListValue, setExtraneousLoanListValue] = useState([])
+
 
   const handleFirstNameChange = (event) => setFirstNameValue(event.target.value);
   const handleLastNameChange = (event) => setLastNameValue(event.target.value);
+  const handleMortageListChange = (event) => setMortageListValue(event => [...event.target.value]);
+  const handleCarLoanListChange = (event) => setCarLoanValue(event => [...event.target.value]);
+  const handleExtraneuousLoanListChange =
+    (event) => setExtraneuousLoanListValue(event => [...event.target.value]);
   const handleCreditHistoryChange = (v) => setCreditHistoryValue(v);
 
   return (
@@ -75,6 +86,15 @@ export default function Form({ props }) {
                 <ShowTooltipSlider onCreditData={handleCreditHistoryChange}></ShowTooltipSlider>
               </Box>
               <Box>
+                <Center>
+                  <Heading size="s">Add Non-Credit-Card Loans</Heading>
+                </Center>
+                <VStack w="full"
+                  divider={<StackDivider borderColor="gray.200" />} >
+                  <Button colorScheme="messenger" onClick={addNewLoan}>Add Loan</Button>
+                </VStack>
+              </Box>
+              <Box>
                 <Button
                   type="submit"
                   onClick={validateForm(
@@ -92,6 +112,10 @@ export default function Form({ props }) {
       </Center>
     </>
   );
+}
+
+function addNewLoan() {
+  console.log("temp")
 }
 
 function validateForm(firstNameValue, lastNameValue, creditHistoryValue) {

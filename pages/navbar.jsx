@@ -4,12 +4,12 @@ import NextLink from 'next/link';
 import { auth } from '../config/firebase';
 import { signOut } from 'firebase/auth';
 import { useRouter } from 'next/router';
-import { getAuth } from '@/config/fireBaseAuthContext';
+import { getFirebaseAuth } from '@/config/fireBaseAuthContext';
 
 const Navbar = () => {
-    const router = useRouter();
-    console.log(getAuth())
-//   const { user, loading } = getAuth() ?? { user: null, loading: true };
+  const router = useRouter();
+  console.log(getFirebaseAuth())
+  //   const { user, loading } = getAuth() ?? { user: null, loading: true };
   const handleSignOut = async () => {
     try {
       await signOut(auth);
@@ -32,8 +32,13 @@ const Navbar = () => {
             <Text color="gray.700" cursor="pointer" fontWeight='semibold'>
               Account
             </Text>
-            </NextLink>
-                  {/* <Text>{user}</Text> */}
+          </NextLink>
+          {/* <NextLink href="/form" passHref>
+            <Text color="gray.700" cursor="pointer" fontWeight='semibold'>
+              Make New Credit Report
+            </Text>
+          </NextLink> */}
+          {/* <Text>{user}</Text> */}
           <Button colorScheme="messenger" onClick={handleSignOut}>
             Sign Out
           </Button>

@@ -19,11 +19,11 @@ import {
 } from "@chakra-ui/react";
 import React, { useState, createContext, useContext, useEffect } from "react";
 
-export default function Form({ props }) {
-  const [firstNameValue, setFirstNameValue] = useState("");
-  const [lastNameValue, setLastNameValue] = useState("");
-  const [creditHistoryValue, setCreditHistoryValue] = useState("");
-  const [showTooltip, setShowTooltip] = React.useState(false);
+export default function Form({props}) {
+    const [firstNameValue, setFirstNameValue] = useState('')
+    const [lastNameValue, setLastNameValue] = useState('')
+    const [creditHistoryValue, setCreditHistoryValue] = useState('')
+    const [showTooltip, setShowTooltip] = React.useState(false)
 
   const handleFirstNameChange = (event) => setFirstNameValue(event.target.value);
   const handleLastNameChange = (event) => setLastNameValue(event.target.value);

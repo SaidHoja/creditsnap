@@ -13,9 +13,11 @@ import {
     Center,
     FormControl,
   } from '@chakra-ui/react'
-  import React, { useState, useEffect } from 'react';
+  import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
+  import React, { useState, createContext, useContext, useEffect } from 'react';
   import { getFirebaseAuth } from '@/config/fireBaseAuthContext';
-  import {firebase} from 'firebase/app'
+  import {getDatabase, ref,set} from 'firebase/database'
+  import CreditHistoryInputter from 'pages/Components/creditHistoryForm.js'
   import {getFirestore, doc, setDoc} from 'firebase/firestore'
 
 
@@ -33,6 +35,45 @@ export default function Form() {
   
   return (
     <>
+    <Center>
+      <Tabs>
+        <TabList>
+          <Tab isDisabled>Credit History</Tab>
+          <Tab isDisabled>Credit Utilization</Tab>
+          <Tab isDisabled>Credit History Length</Tab>
+          <Tab isDisabled>Credit Mix</Tab>
+          <Tab isDisabled>New Credit</Tab>
+          <Tab isDisabled>Review</Tab>
+        </TabList>
+
+        <TabPanels>
+          <Center>
+          <TabPanel>
+                <Heading size="lg" textTransform="uppercase">
+                  Credit History
+                </Heading>
+                <ShowTooltipSlider onCreditData={handleCreditHistoryChange}></ShowTooltipSlider>
+          </TabPanel>
+          </Center>
+          <TabPanel>
+            <p>two!</p>
+          </TabPanel>
+          <TabPanel>
+            {CreditHistoryInputter()}
+          </TabPanel>
+          <TabPanel>
+            <p>four!</p>
+          </TabPanel>
+          <TabPanel>
+            <p>five!</p>
+          </TabPanel>
+          <TabPanel>
+            <p>six!</p>
+          </TabPanel>
+          
+        </TabPanels>
+      </Tabs>
+      </Center>
       <h1>
         For the Following Questions, please refer to data from the past 7 years
       </h1>
@@ -44,28 +85,6 @@ export default function Form() {
 
           <CardBody>
             <Stack divider={<StackDivider />} spacing="4">
-              <Box>
-                <Heading size="xs" textTransform="uppercase">
-                  Personal Information
-                </Heading>
-                <label htmlFor="firstName">First Name:</label>
-                <Input
-                  value={firstNameValue}
-                  onChange={(event ) => setFirstNameValue(event.target.value)}
-                  placeholder="First Name"
-                  name="firstName"
-                  id="firstName"
-                />
-
-                <label htmlFor="lastName">Last Name:</label>
-                <Input
-                  value={lastNameValue}
-                  onChange={(event) => setLastNameValue(event.target.value)}
-                  placeholder="Last Name"
-                  name="lastName"
-                  id="lastName"
-                />
-              </Box>
 
               <Box>
                 <Heading size="xs" textTransform="uppercase">

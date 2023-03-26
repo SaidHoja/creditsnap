@@ -1,27 +1,26 @@
 "use client";
 import ShowTooltipSlider from "@/components/ShowTooltipSlider";
 import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Stack,
-  StackDivider,
-  Box,
-  Heading,
-  Input,
-  Slider,
-  SliderTrack,
-  SliderFilledTrack,
-  SliderThumb,
-  SliderMark,
-  Tooltip,
-  Center,
-  Show,
-} from "@chakra-ui/react";
-import React, { useState, createContext, useContext, useEffect } from "react";
-import { getDatabase } from "firebase/database";
-import { useFirebaseAuth } from "@/config/fireBaseAuthContext";
+    Button,
+    Card,
+    CardBody,
+    CardHeader,
+    Stack,
+    StackDivider,
+    Box,
+    Heading,
+    Input,
+    Slider,
+    SliderTrack,
+    SliderFilledTrack,
+    SliderThumb,
+    SliderMark,
+    Tooltip,
+    Center,
+  } from '@chakra-ui/react'
+  import Link from 'next/link';
+  import React, { useState, createContext, useContext, useEffect } from 'react';
+  import { getFirebaseAuth } from '@/config/fireBaseAuthContext';
 
 export default function Form({ props }) {
   const [firstNameValue, setFirstNameValue] = useState('')
@@ -115,7 +114,5 @@ function validateForm(firstNameValue, lastNameValue, creditHistoryValue) {
 }
 
 function writeCreditData() {
-  const { user, loading } = useFirebaseAuth
-  console.log(user)
-  console.log(loading)
+  console.log(getFirebaseAuth())
 }

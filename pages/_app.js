@@ -1,13 +1,15 @@
-import { useEffect } from 'react';
-import withAuth from 'config/withAuth';
+import { ChakraProvider } from '@chakra-ui/react';
+import { FirebaseAuthProvider } from '/config/firebaseAuthContext';
+import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
-  useEffect(() => {
-    console.log('App component mounted');
-  }, []);
-
-  const AuthComponent = withAuth(Component);
-  return <Component {...pageProps} />;
+  return (
+    <ChakraProvider>
+      <FirebaseAuthProvider>
+        <Component {...pageProps} />
+      </FirebaseAuthProvider>
+    </ChakraProvider>
+  );
 }
 
 export default MyApp;

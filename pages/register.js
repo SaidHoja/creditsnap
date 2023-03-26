@@ -17,7 +17,7 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
-  const auth = getAuth();
+  const auth = getFirebaseAuth();
 
   const handleRegister = async (event) => {
     event.preventDefault();

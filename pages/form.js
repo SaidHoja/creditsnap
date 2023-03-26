@@ -2,37 +2,36 @@
 import ShowTooltipSlider from '@/components/showTooltipSlider';
 // import ShowTooltipSlider from "@/components/ShowTooltipSlider";
 import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Stack,
-  StackDivider,
-  Box,
-  Heading,
-  Input,
-  Slider,
-  SliderTrack,
-  SliderFilledTrack,
-  SliderThumb,
-  SliderMark,
-  Tooltip,
-  Center,
-  VStack,
-} from '@chakra-ui/react'
-import Link from 'next/link';
-import React, { useState, createContext, useContext, useEffect } from 'react';
-import { getFirebaseAuth } from '@/config/fireBaseAuthContext';
-
-
+    Button,
+    Card,
+    CardBody,
+    CardHeader,
+    Stack,
+    StackDivider,
+    Box,
+    Heading,
+    Input,
+    Slider,
+    SliderTrack,
+    SliderFilledTrack,
+    SliderThumb,
+    SliderMark,
+    Tooltip,
+    Center,
+  } from '@chakra-ui/react'
+  import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
+  import React, { useState, createContext, useContext, useEffect } from 'react';
+  import { getFirebaseAuth } from '@/config/fireBaseAuthContext';
+  import {getDatabase, ref,set} from 'firebase/database'
+  import CreditHistoryInputter from 'pages/Components/creditHistoryForm.js'
 
 export default function Form({ props }) {
   const [firstNameValue, setFirstNameValue] = useState('')
   const [lastNameValue, setLastNameValue] = useState('')
   const [creditHistoryValue, setCreditHistoryValue] = useState('')
-  const [mortageListValue, setMortageListValue] = useState([])
-  const [carLoanListValue, setCarLoanListValue] = useState([])
-  const [extraneousLoanListValue, setExtraneousLoanListValue] = useState([])
+
+  const [showTooltip, setShowTooltip] = React.useState(false)
+  const [dataNeedsSubmit, setDataNeedsSubmit] = useState(false)
 
 
   const handleFirstNameChange = (event) => setFirstNameValue(event.target.value);
@@ -43,8 +42,48 @@ export default function Form({ props }) {
     (event) => setExtraneuousLoanListValue(event => [...event.target.value]);
   const handleCreditHistoryChange = (v) => setCreditHistoryValue(v);
 
+  
   return (
     <>
+    <Center>
+      <Tabs>
+        <TabList>
+          <Tab isDisabled>Credit History</Tab>
+          <Tab isDisabled>Credit Utilization</Tab>
+          <Tab isDisabled>Credit History Length</Tab>
+          <Tab isDisabled>Credit Mix</Tab>
+          <Tab isDisabled>New Credit</Tab>
+          <Tab isDisabled>Review</Tab>
+        </TabList>
+
+        <TabPanels>
+          <Center>
+          <TabPanel>
+                <Heading size="lg" textTransform="uppercase">
+                  Credit History
+                </Heading>
+                <ShowTooltipSlider onCreditData={handleCreditHistoryChange}></ShowTooltipSlider>
+          </TabPanel>
+          </Center>
+          <TabPanel>
+            <p>two!</p>
+          </TabPanel>
+          <TabPanel>
+            {CreditHistoryInputter()}
+          </TabPanel>
+          <TabPanel>
+            <p>four!</p>
+          </TabPanel>
+          <TabPanel>
+            <p>five!</p>
+          </TabPanel>
+          <TabPanel>
+            <p>six!</p>
+          </TabPanel>
+          
+        </TabPanels>
+      </Tabs>
+      </Center>
       <h1>
         For the Following Questions, please refer to data from the past 7 years
       </h1>
@@ -56,28 +95,6 @@ export default function Form({ props }) {
 
           <CardBody>
             <Stack divider={<StackDivider />} spacing="4">
-              <Box>
-                <Heading size="xs" textTransform="uppercase">
-                  Personal Information
-                </Heading>
-                <label htmlFor="firstName">First Name:</label>
-                <Input
-                  value={firstNameValue}
-                  onChange={handleFirstNameChange}
-                  placeholder="First Name"
-                  name="firstName"
-                  id="firstName"
-                />
-
-                <label htmlFor="lastName">Last Name:</label>
-                <Input
-                  value={lastNameValue}
-                  onChange={handleLastNameChange}
-                  placeholder="Last Name"
-                  name="lastName"
-                  id="lastName"
-                />
-              </Box>
 
               <Box>
                 <Heading size="xs" textTransform="uppercase">
@@ -138,5 +155,8 @@ function validateForm(firstNameValue, lastNameValue, creditHistoryValue) {
 }
 
 function writeCreditData() {
-  console.log(getFirebaseAuth())
+  const context = getFirebaseAuth();
+  const userId = context.user.auth.currentUser.reloadUserInfo.localId
+  const db = getDatabase();
+  console.log(userId)
 }

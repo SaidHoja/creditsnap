@@ -7,9 +7,10 @@ import { useRouter } from 'next/router';
 import { getFirebaseAuth } from '@/config/fireBaseAuthContext';
 
 const Navbar = () => {
-  const router = useRouter();
-  console.log(getFirebaseAuth())
-  //   const { user, loading } = getAuth() ?? { user: null, loading: true };
+
+    const router = useRouter();
+    console.log(getFirebaseAuth())
+//   const { user, loading } = getAuth() ?? { user: null, loading: true };
   const handleSignOut = async () => {
     try {
       await signOut(auth);

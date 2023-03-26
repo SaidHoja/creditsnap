@@ -114,5 +114,6 @@ function validateForm(firstNameValue, lastNameValue, creditHistoryValue) {
 }
 
 function writeCreditData() {
-  console.log(getFirebaseAuth())
+  const context = getFirebaseAuth();
+  console.log(context)
 }

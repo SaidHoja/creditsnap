@@ -4,11 +4,11 @@ import NextLink from 'next/link';
 import { auth } from '../config/firebase';
 import { signOut } from 'firebase/auth';
 import { useRouter } from 'next/router';
-import { getAuth } from '@/config/fireBaseAuthContext';
+import { getFirebaseAuth } from '@/config/fireBaseAuthContext';
 
 const Navbar = () => {
     const router = useRouter();
-    console.log(getAuth())
+    console.log(getFirebaseAuth())
 //   const { user, loading } = getAuth() ?? { user: null, loading: true };
   const handleSignOut = async () => {
     try {

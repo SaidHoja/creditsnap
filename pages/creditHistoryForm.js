@@ -1,12 +1,12 @@
-import { Input,InputGroup, InputLeftElement, Stack, IconButton, HStack } from '@chakra-ui/react'
-import { AddIcon} from '@chakra-ui/icons'
+import { Input,InputGroup, InputLeftElement, Stack, IconButton, HStack, Button, Heading } from '@chakra-ui/react'
+import { AddIcon,DeleteIcon} from '@chakra-ui/icons'
 import { Center, Square, Circle } from '@chakra-ui/react'
 import React, { useState } from 'react'
 
 export default function creditHistoryInputter(){
     //const [creditAccount, setCreditAccounts] = useState([]) 
     const [creditDates, setCreditDates] = useState([
-        {startDate: "", endDate: ""},{startDate: "", endDate: ""}
+        {startDate: "", endDate: ""}
     ]);
     function AddRow(){
         console.log("button pressed")
@@ -18,36 +18,58 @@ export default function creditHistoryInputter(){
         data[index][event.target.name] = event.target.value;
         setCreditDates(data)
     }
-    console.log(creditDates)
+    function RemoveItem(index){
+        let data = [...creditDates];
+        data.splice(index, 1)
+        setCreditDates(data)
+    }
+    function GetTodayDate(){
+        let month = new Date().getMonth() + 1
+        if (month<10)
+            month = "0" + month
+        let x = ("" + new Date().getFullYear() + "-" + month)
+        //console.log(x)
+        return x;
+    }
+    //console.log(creditDates)
     return (
         <>
+        
+
         <Center >
-            <Stack spacing = {3} colorscheme="messenger">
+            <Stack spacing = {4} >
+                <HStack><Heading>Start Date    </Heading><Heading>End Date</Heading></HStack>
                 {
                  creditDates.map( (input,index) => {
                     return (
+                        <HStack>
                         <InputGroup key = {index}>
                             <InputLeftElement children = {index + 1} />
                             <Input
                                 name = 'startDate'
-                                size="md"
                                 type = "month"
                                 value={input.startDate}
                                 onChange = {event => HandleChange(event,index)}
+                                max = {GetTodayDate()}
+
                             />
                             <Input
                                 name = 'endDate'
-                                size="md"
                                 type = "month"
                                 value={input.endDate}
                                 onChange = {event => HandleChange(event,index)}
+                                min = {creditDates[index].startDate}
+                                max = {GetTodayDate()}
                             />
+
                     </InputGroup>
+                    <IconButton icon={<DeleteIcon/>} onClick={RemoveItem} >Remove</IconButton>
+                    </HStack>
                     )
                 }
                 
                 )}
-                 <IconButton onClick={AddRow} icon={<AddIcon />}/>
+                 <IconButton colorScheme = "messenger" onClick={AddRow} icon={<AddIcon />}/>
             </Stack>
         </Center>
         </>

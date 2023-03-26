@@ -1,4 +1,4 @@
-import { Input, Stack } from '@chakra-ui/react'
+import { Input,InputGroup, InputLeftElement, Stack } from '@chakra-ui/react'
 import { Center, Square, Circle } from '@chakra-ui/react'
 import React, { useState } from 'react'
 
@@ -9,11 +9,16 @@ export default function creditHistoryInputter(){
         <>
         <Center >
             <Stack spacing = {3} colorscheme="messenger">
-                <Input 
-                 placeholder="Select Date and Time"
-                 size="md"
-                 type = "month"
+                <InputGroup>
+                <InputLeftElement 
+                    children="Credit Account 1"
                 />
+                <Input
+                    placeholder="Select Date and Time"
+                    size="md"
+                    type = "month"
+                 />
+                </InputGroup>
                 <Input 
                  placeholder="Select Date and Time"
                  size="md"

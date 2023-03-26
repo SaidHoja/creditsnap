@@ -20,7 +20,7 @@ import {
   import Link from 'next/link';
   import React, { useState, createContext, useContext, useEffect } from 'react';
 
-export default function form({props}) {
+export default function Form({props}) {
     const [firstNameValue, setFirstNameValue] = useState('')
     const [lastNameValue, setLastNameValue] = useState('')
     const [creditHistoryValue, setCreditHistoryValue] = useState('')

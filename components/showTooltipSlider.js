@@ -5,7 +5,7 @@ import { Slider,
     SliderThumb,
     SliderMark,
     Tooltip} from "@chakra-ui/react";
-import React, { useState, createContext, useContext, useEffect } from "react";
+import React, { useState } from "react";
 
 export default function ShowTooltipSlider(props) {
   const [value, setValue] = useState(5)
@@ -22,7 +22,7 @@ export default function ShowTooltipSlider(props) {
                   min={0}
                   max={100}
                   colorScheme="teal"
-                  onChange={(v) => {
+                  onChangeEnd={(v) => {
                     setValue(v)
                     handleChange(v)
                   }}

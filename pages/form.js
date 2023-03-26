@@ -1,4 +1,5 @@
 "use client";
+import ShowTooltipSlider from "@/components/ShowTooltipSlider";
 import {
   Button,
   Card,
@@ -16,8 +17,11 @@ import {
   SliderMark,
   Tooltip,
   Center,
+  Show,
 } from "@chakra-ui/react";
 import React, { useState, createContext, useContext, useEffect } from "react";
+import { getDatabase } from "firebase/database";
+import { useFirebaseAuth } from "@/config/fireBaseAuthContext";
 
 export default function Form({props}) {
     const [firstNameValue, setFirstNameValue] = useState('')
@@ -27,6 +31,7 @@ export default function Form({props}) {
 
   const handleFirstNameChange = (event) => setFirstNameValue(event.target.value);
   const handleLastNameChange = (event) => setLastNameValue(event.target.value);
+  const handleCreditHistoryChange = (v) => setCreditHistoryValue(v);
 
   return (
     <>
@@ -68,14 +73,15 @@ export default function Form({props}) {
                 <Heading size="xs" textTransform="uppercase">
                   Credit History
                 </Heading>
-                <Slider
+                <ShowTooltipSlider onCreditData = {handleCreditHistoryChange}></ShowTooltipSlider>
+                {/* <Slider
                   id="slider"
                   defaultValue={5}
                   min={0}
                   max={100}
                   colorScheme="teal"
                   onChange={(v) => {
-                    setCreditHistoryValue(v);
+                    handleCreditHistoryChange(v)
                   }}
                   onMouseEnter={() => setShowTooltip(true)}
                   onMouseLeave={() => setShowTooltip(false)}
@@ -102,7 +108,7 @@ export default function Form({props}) {
                   >
                     <SliderThumb />
                   </Tooltip>
-                </Slider>
+                </Slider> */}
               </Box>
 
               <Box>
@@ -141,4 +147,11 @@ function validateForm(firstNameValue, lastNameValue, creditHistoryValue) {
   console.log(firstNameValue);
   console.log(lastNameValue);
   console.log(creditHistoryValue);
+  writeCreditData()
+}
+
+function writeCreditData() {
+    const {user, loading} = useFirebaseAuth
+    console.log(user)
+    console.log(loading)
 }

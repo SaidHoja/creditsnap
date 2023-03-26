@@ -18,20 +18,22 @@ import {
     Tooltip,
     Center,
   } from '@chakra-ui/react'
-  import Link from 'next/link';
   import React, { useState, createContext, useContext, useEffect } from 'react';
   import { getFirebaseAuth } from '@/config/fireBaseAuthContext';
+  import {getDatabase, ref,set} from 'firebase/database'
 
 export default function Form({ props }) {
   const [firstNameValue, setFirstNameValue] = useState('')
   const [lastNameValue, setLastNameValue] = useState('')
   const [creditHistoryValue, setCreditHistoryValue] = useState('')
   const [showTooltip, setShowTooltip] = React.useState(false)
+  const [dataNeedsSubmit, setDataNeedsSubmit] = useState(false)
 
   const handleFirstNameChange = (event) => setFirstNameValue(event.target.value);
   const handleLastNameChange = (event) => setLastNameValue(event.target.value);
   const handleCreditHistoryChange = (v) => setCreditHistoryValue(v);
 
+  
   return (
     <>
       <h1>
@@ -115,5 +117,7 @@ function validateForm(firstNameValue, lastNameValue, creditHistoryValue) {
 
 function writeCreditData() {
   const context = getFirebaseAuth();
-  console.log(context)
+  const userId = context.user.auth.currentUser.reloadUserInfo.localId
+  const db = getDatabase();
+  console.log(userId)
 }

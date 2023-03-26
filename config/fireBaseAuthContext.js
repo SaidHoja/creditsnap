@@ -30,6 +30,6 @@ export const FirebaseAuthProvider = ({ children }) => {
 };
 
 
-export const getAuth = () => {
+export const getFirebaseAuth = () => {
   return useContext(FirebaseAuthContext);
 };

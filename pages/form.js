@@ -19,6 +19,7 @@ import {
   } from '@chakra-ui/react'
   import Link from 'next/link';
   import React, { useState, createContext, useContext, useEffect } from 'react';
+  import { getFirebaseAuth } from '@/config/fireBaseAuthContext';
 
 export default function form({props}) {
     const [firstNameValue, setFirstNameValue] = useState('')
@@ -161,4 +162,5 @@ function validateForm(firstNameValue, lastNameValue, creditHistoryValue) {
     console.log(firstNameValue)
     console.log(lastNameValue)
     console.log(creditHistoryValue)
+    console.log(getFirebaseAuth())
 }

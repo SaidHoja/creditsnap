@@ -5,61 +5,51 @@ import React, { useState } from 'react'
 
 export default function CreditUtilInputter(){
     //const [creditAccount, setCreditAccounts] = useState([]) 
-    const [creditDates, setCreditDates] = useState([
-        {startDate: "", endDate: ""}
+    const [creditUtils, setCreditUtils] = useState([
+        {balance: "", limit: ""}
     ]);
     function AddRow(){
         console.log("button pressed")
-        let newCreditDate =  {startDate: "", endDate: ""}
-        setCreditDates([...creditDates,newCreditDate])
+        let newCreditUtil =  {balance: "", limit: ""}
+        setCreditUtils([...creditUtils,newCreditUtil])
     }
     function HandleChange(event,index){
-        let data = [...creditDates];
+        let data = [...creditUtils];
         data[index][event.target.name] = event.target.value;
-        setCreditDates(data)
+        setCreditUtils(data)
     }
     function RemoveItem(index){
-        let data = [...creditDates];
+        let data = [...creditUtils];
         data.splice(index, 1)
-        setCreditDates(data)
+        setCreditUtils(data)
     }
-    function GetTodayDate(){
-        let month = new Date().getMonth() + 1
-        if (month<10)
-            month = "0" + month
-        let x = ("" + new Date().getFullYear() + "-" + month)
-        //console.log(x)
-        return x;
-    }
+
     //console.log(creditDates)
     return (
         <>
-        
-
         <Center >
             <Stack spacing = {4} >
-                <HStack><Heading>Start Date    </Heading><Heading>End Date</Heading></HStack>
+                <HStack><Heading>Balance    </Heading><Heading>Limit</Heading></HStack>
                 {
-                 creditDates.map( (input,index) => {
+                 creditUtils.map( (input,index) => {
                     return (
                         <HStack>
                         <InputGroup key = {index}>
                             <InputLeftElement children = {index + 1} />
                             <Input
-                                name = 'startDate'
-                                type = "month"
-                                value={input.startDate}
+                                name = 'creditBalance'
+                                type = "number"
+                                value={input.creditBalance}
                                 onChange = {event => HandleChange(event,index)}
-                                max = {GetTodayDate()}
+                                min= "0"
 
                             />
                             <Input
-                                name = 'endDate'
-                                type = "month"
-                                value={input.endDate}
+                                name = 'creditLimit'
+                                type = "number"
+                                value={input.creditLimit}
                                 onChange = {event => HandleChange(event,index)}
-                                min = {creditDates[index].startDate}
-                                max = {GetTodayDate()}
+                                min = "0"
                             />
 
                     </InputGroup>
@@ -76,16 +66,3 @@ export default function CreditUtilInputter(){
         
     )
 }
-/*
-                <InputGroup>
-                    <InputLeftElement 
-                        children="1"
-                    />
-                    <Input
-                        placeholder="Select Date and Time"
-                        size="md"
-                        type = "month"
-                    />
-                 </InputGroup>
-                 <IconButton onClick="AddRow" icon={<AddIcon />} />
-*/

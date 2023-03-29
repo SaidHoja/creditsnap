@@ -18,6 +18,9 @@ import {
   import {getDatabase, ref,set} from 'firebase/database'
   import CreditHistoryInputter from 'pages/Components/creditHistoryForm.js'
   import CreditPaymentHistory from 'pages/Components/creditPaymentHistory.js'
+  import CreditUtilInputter from 'pages/Components/creditUtilForm.js'
+  import CreditMixForm from 'pages/Components/creditMixForm.js'
+
   import {getFirestore, doc, setDoc} from 'firebase/firestore'
   import NavBar from 'pages/navbar.jsx'
 
@@ -50,13 +53,13 @@ export default function Form() {
           </TabPanel>
           </Center>
           <TabPanel>
-            <p>two!</p>
+            {CreditUtilInputter()}
           </TabPanel>
           <TabPanel>
             {CreditHistoryInputter()}
           </TabPanel>
           <TabPanel>
-            <p>four!</p>
+            {CreditMixForm()}
           </TabPanel>
           <TabPanel>
             <p>five!</p>
@@ -68,9 +71,6 @@ export default function Form() {
         </TabPanels>
       </Tabs>
       </Center>
-      <h1>
-        For the Following Questions, please refer to data from the past 7 years
-      </h1>
     </>
   );
 }

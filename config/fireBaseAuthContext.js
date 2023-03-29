@@ -18,6 +18,10 @@ export const FirebaseAuthProvider = ({ children }) => {
     };
   }, []);
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <FirebaseAuthContext.Provider value={{ user, loading }}>
       {children}
@@ -25,6 +29,7 @@ export const FirebaseAuthProvider = ({ children }) => {
   );
 };
 
-export const useFirebaseAuth = () => {
+
+export const getFirebaseAuth = () => {
   return useContext(FirebaseAuthContext);
 };

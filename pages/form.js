@@ -1,5 +1,4 @@
 "use client";
-import ShowTooltipSlider from "@/components/ShowTooltipSlider";
 import {
     Button,
     Card,
@@ -18,7 +17,9 @@ import {
   import { getFirebaseAuth } from '@/config/fireBaseAuthContext';
   import {getDatabase, ref,set} from 'firebase/database'
   import CreditHistoryInputter from 'pages/Components/creditHistoryForm.js'
+  import CreditPaymentHistory from 'pages/Components/creditPaymentHistory.js'
   import {getFirestore, doc, setDoc} from 'firebase/firestore'
+  import NavBar from 'pages/navbar.jsx'
 
 
 export default function Form() {
@@ -27,32 +28,25 @@ export default function Form() {
   const [creditHistoryValue, setCreditHistoryValue] = useState(5)
   const context = getFirebaseAuth()
 
-  const handleCreditHistoryChange = (v) => {
-    if (v != creditHistoryValue) {
-      setCreditHistoryValue(v)
-    }
-  }
   
   return (
     <>
+    <NavBar/>
     <Center>
       <Tabs>
         <TabList>
-          <Tab isDisabled>Credit History</Tab>
-          <Tab isDisabled>Credit Utilization</Tab>
-          <Tab isDisabled>Credit History Length</Tab>
-          <Tab isDisabled>Credit Mix</Tab>
-          <Tab isDisabled>New Credit</Tab>
-          <Tab isDisabled>Review</Tab>
+          <Tab >Credit History</Tab>
+          <Tab >Credit Utilization</Tab>
+          <Tab >Credit History Length</Tab>
+          <Tab >Credit Mix</Tab>
+          <Tab >New Credit</Tab>
+          <Tab >Review</Tab>
         </TabList>
 
         <TabPanels>
           <Center>
           <TabPanel>
-                <Heading size="lg" textTransform="uppercase">
-                  Credit History
-                </Heading>
-                <ShowTooltipSlider onCreditData={handleCreditHistoryChange}></ShowTooltipSlider>
+                {CreditPaymentHistory()}
           </TabPanel>
           </Center>
           <TabPanel>
@@ -77,33 +71,6 @@ export default function Form() {
       <h1>
         For the Following Questions, please refer to data from the past 7 years
       </h1>
-      <Center>
-        <Card align="center" maxWidth="50%">
-          <CardHeader>
-            <Heading size="md">Submit Info</Heading>
-          </CardHeader>
-
-          <CardBody>
-            <Stack divider={<StackDivider />} spacing="4">
-
-              <Box>
-                <Heading size="xs" textTransform="uppercase">
-                  Credit History
-                </Heading>
-                  <ShowTooltipSlider onCreditData={handleCreditHistoryChange}></ShowTooltipSlider>
-              </Box>
-              <Box>
-                <Button
-                  type="submit"
-                  onClick={() => validateForm(firstNameValue, lastNameValue, creditHistoryValue, context)}
-                >
-                  Submit
-                </Button>
-              </Box>
-            </Stack>
-          </CardBody>
-        </Card>
-      </Center>
     </>
   );
 }
